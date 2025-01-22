@@ -21,44 +21,14 @@ The main connection procedure is in the following three steps.
 
 ![](https://raw.githubusercontent.com/aakmsk/serial_bus_servo_controller/main/images/img.jpg)
 
-# Download the module
+# Download the library, compile and execute the example
 ## Terminal:
 ```
-git clone https://github.com/aakmsk/serial_bus_servo_controller_python_module.git
-cd serial_bus_servo_controller_python_module/scripts
-```
+git clone https://github.com/Laroto/serial_bus_servo_controller_cpp.git
+cd serial_bus_servo_controller_cpp
+g++ -Iinclude -o full_example src/examples/full_example.cpp
+./full_example
 
-# Usage
-Start the python interpreter.
-
-## Python:
-```
-import serial_bus_servo_controller as sbsc
-controller = sbsc.SBS_Controller("/dev/ttyUSB0")
-```
-Pass the device name corresponding to the USB serial converter as an argument, and instantiate the SBS_Controller class defined in the module.
-
-- Control specified servos
-```
-# This is an example of rotating servos with IDs 1 and 2 to positions 100 and 400, respectively, in 500ms.
-
-controller.cmd_servo_move([1, 2], [200, 400], 500)
-```
-- Get the rotation positions of specified servos
-```
-# Get the current rotation position of the servos with IDs 1 and 2
-
-p_val = controller.cmd_mult_servo_pos_read([1, 2])
-```
-- Power off the specified servos
-```
-# Power off the servos with IDs 1 and 2
-
-controller.cmd_mult_servo_unload([1, 2])
-```
-- Get the battery voltage
-```
-b_val = controller.cmd_get_battery_voltage()
 ```
 
 # Update history
