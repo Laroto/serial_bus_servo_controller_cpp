@@ -1,5 +1,6 @@
-# serial_bus_servo_controller_python_module
-This is a python module to control serial servos (such as LX-224) connected to a serial bus servo controller from a windows machine or a linux machine (such as Raspberry Pi).
+# serial_bus_servo_controller_cpp
+This is a C++ library to control serial servos (such as LX-224, or HT-45) connected to a serial bus servo controller from a windows machine or a linux machine (such as Raspberry Pi).
+Is is a fork from @aakmsk's work from (this repository)[git@github.com:Laroto/serial_bus_servo_controller_cpp.git]
 
 LX-224 (https://www.hiwonder.hk/products/hiwonder-lx-224-intelligent-serial-bus-servo)</br>
 serial bus servo controller (https://www.hiwonder.hk/collections/servo/products/serial-bus-servo-controller)
@@ -63,4 +64,5 @@ b_val = controller.cmd_get_battery_voltage()
 # Update history
 |date|Details|
 |----|----|
+|2025/01/22|cpp port|
 |2021/08/20|first commit|
