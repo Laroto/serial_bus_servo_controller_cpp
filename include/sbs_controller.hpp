@@ -217,6 +217,7 @@ public:
             }
             return positions;
         }
+        return std::nullopt;
     }
 };
 
