@@ -10,6 +10,7 @@
 #include <fcntl.h>
 #include <chrono>
 #include <optional>
+#include <thread>
 
 class SBSController {
 private:
@@ -158,8 +159,12 @@ public:
     std::optional<float> cmdGetBatteryVoltage() {
         std::vector<uint8_t> buf = {0x55, 0x55, 0x02, 0x0F};
         writeToSerial(buf);
- 
 
+        // Wait for the response
+        size_t expectedBytes = 6;
+        auto wait_for = 2* static_cast<float>(10 * expectedBytes) / baudRate_;
+        std::this_thread::sleep_for(std::chrono::duration<float>(wait_for));
+ 
         auto response = readFromSerial(6);
         if (!response) {
             std::cerr <<"Battery voltage response timeout" << std::endl;
@@ -199,9 +204,15 @@ public:
             buf.push_back(id);
         }
 
+        tcflush(serialPort, TCIOFLUSH);
         writeToSerial(buf);
 
         size_t expectedBytes = servoIds.size() * 3 + 5;
+
+        // wait for the response
+        auto wait_for = 2* static_cast<float>(10 * expectedBytes) / baudRate_;
+        std::this_thread::sleep_for(std::chrono::duration<float>(wait_for));
+
         auto response = readFromSerial(expectedBytes);
         if (!response) {
             std::cerr << "Warning: Servo response timeout" << std::endl;
